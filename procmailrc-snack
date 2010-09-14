@@ -1,0 +1,12 @@
+MAILHOME=/var/snack
+MAILDIR=$MAILHOME/
+PMDIR=/home/krille/.procmail.d
+LOGFILE=$PMDIR/log-snack
+VERBOSE=on
+UMASK=007
+:0c:
+* ^References: <\/(.*)>
+`echo $MATCH | sed 's/>.*$/\//'`
+:0:
+* ^References: <\/(.*)>
+| php /home/krille/hax/snack/build.php `echo $MATCH | sed 's/>.*$/\//'`
